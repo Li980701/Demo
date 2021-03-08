@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .d {
+
+            border: 1px solid red;
+            width: 250px;
+        }
+    </style>
+</head>
+
+<body>
+    <div><button>Click</button></div>
+    <div class="d"></div>
+
+</body>
+<script>
+    const btn = document.querySelector('button')
+    const d = document.querySelector('.d')
+    btn.onclick = function () {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://www.alphavantage.co/query?function=EARNINGS&symbol=IBM&apikey=demo')
+        xhr.send();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    // console.log(xhr.status)
+                    // console.log(xhr.statusText)
+                    // console.log(xhr.getAllResponseHeaders)
+                    // console.log(xhr.response)
+                    // d.innerHTML = xhr.response
+                    let data = JSON.parse(xhr.response)
+                    console.log(data)
+                    // d.innerHTML = data.symbol
+
+                    d.innerHTML = data.annualEarnings[0].fiscalDateEnding + ' ' + data.annualEarnings[0].reportedEPS
+
+                }
+            }
+        }
+    }
+</script>
+
+</html>
