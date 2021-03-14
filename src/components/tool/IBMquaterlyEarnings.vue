@@ -7,28 +7,29 @@
   />
 </template>
 <script>
-// import axios as required
-import axios from "axios";
-axios({
-  //Use IBM Api
+//import request() function from axios js
+import { request } from "../../network/axios";
+request({
   url:
     "https://www.alphavantage.co/query?function=EARNINGS&symbol=IBM&apikey=demo",
-  // Promise can be used defautly
-}).then((res) => {
-  // Push IBM annualEarnings data into table
-  console.log(res);
-  for (let i = 0; i < res.data.quarterlyEarnings.length; i++) {
-    data.push({
-      key: i,
-      comName: res.data.symbol,
-      quarStart: res.data.quarterlyEarnings[i].fiscalDateEnding,
-      quarEnd: res.data.quarterlyEarnings[i].reportedDate,
-      reEps: res.data.quarterlyEarnings[i].reportedEPS,
-      estEps: res.data.quarterlyEarnings[i].estimatedEPS,
-      suprise: res.data.quarterlyEarnings[i].surprise,
-    });
-  }
-});
+})
+  .then((res) => {
+    // Push IBM annualEarnings data into table
+    console.log(res);
+    for (let i = 0; i < res.data.quarterlyEarnings.length; i++) {
+      data.push({
+        key: i,
+        comName: res.data.symbol,
+        quarStart: res.data.quarterlyEarnings[i].fiscalDateEnding,
+        quarEnd: res.data.quarterlyEarnings[i].reportedDate,
+        reEps: res.data.quarterlyEarnings[i].reportedEPS,
+        estEps: res.data.quarterlyEarnings[i].estimatedEPS,
+        suprise: res.data.quarterlyEarnings[i].surprise,
+      });
+    }
+  })
+  .catch(console.log(console.log("Error Cannot Read Results From API")));
+
 const columns = [
   {
     title: "Company Name",

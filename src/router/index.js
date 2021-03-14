@@ -28,7 +28,7 @@ const routes = [
     {
         path: '/quarttable',
         component: quarttable
-    }
+    },
 
 ]
 

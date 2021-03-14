@@ -7,24 +7,24 @@
   />
 </template>
 <script>
-// import axios as required
-import axios from "axios";
-axios({
-  //Use IBM Api
+//import request() function from axios js
+import { request } from "../../network/axios";
+request({
   url:
     "https://www.alphavantage.co/query?function=EARNINGS&symbol=IBM&apikey=demo",
-  // Promise can be used defautly
-}).then((res) => {
-  // Push IBM annualEarnings data into table
-  for (let i = 0; i < res.data.annualEarnings.length; i++) {
-    data.push({
-      key: i,
-      CompanyName: res.data.symbol,
-      AnnualEarnings: res.data.annualEarnings[i].reportedEPS,
-      date: res.data.annualEarnings[i].fiscalDateEnding,
-    });
-  }
-});
+})
+  .then((res) => {
+    for (let i = 0; i < res.data.annualEarnings.length; i++) {
+      data.push({
+        key: i,
+        CompanyName: res.data.symbol,
+        AnnualEarnings: res.data.annualEarnings[i].reportedEPS,
+        date: res.data.annualEarnings[i].fiscalDateEnding,
+      });
+    }
+  })
+  .catch(console.log("Error Cannot Read Results From API"));
+
 const columns = [
   {
     title: "Company Name",

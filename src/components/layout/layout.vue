@@ -26,7 +26,7 @@
               <a-menu-item key="4" @click="$router.push({ path: '/calendar' })">
                 Calendar</a-menu-item
               >
-              <a-menu-item key="5"> Components </a-menu-item>
+              <a-menu-item key="5"> echarts </a-menu-item>
               <a-menu-item
                 key="6"
                 @click="$router.push({ path: '/annultable' })"
@@ -69,8 +69,6 @@
     </a-layout>
   </div>
 </template>
-
-
 
 
 <script>
